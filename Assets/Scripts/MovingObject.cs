@@ -5,11 +5,12 @@ using UnityEngine;
 public class MovingObject : MonoBehaviour
 {
     public int whatAmI;
+    private GameManager gameManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -17,19 +18,28 @@ public class MovingObject : MonoBehaviour
     {
         if (whatAmI == 1) 
         {
+            //I am the bullet
             transform.Translate(new Vector3(0, 1, 0) * Time.deltaTime * 8f);
         }
         else if (whatAmI == 2) 
         {
+            //I am the enemy
             transform.Translate(new Vector3(0, 1, 0) * Time.deltaTime * 4f);
         }
         else if(whatAmI == 3) 
         {
-            transform.Translate(new Vector3(0, -1, 0) * Time.deltaTime * Random.Range(3f, 6f));
+            //I am the clouds
+            transform.Translate(new Vector3(0, -1, 0) * Time.deltaTime * Random.Range(3f, 6f) * gameManager.cloudSpeed);
         }
         else if(whatAmI == 4)
         {
+            //I am the coin
             transform.Translate(new Vector3(0, -1, 0) * Time.deltaTime * Random.Range(3f, 6f));
+        }
+        else if (whatAmI == 5)
+        {
+            //I am the Power up
+            transform.Translate(new Vector3(0, -0.1f, 0) * Time.deltaTime * Random.Range(3f, 6f));
         }
 
         if ((transform.position.y > 9f || transform.position.y <= -9f) && whatAmI != 3)

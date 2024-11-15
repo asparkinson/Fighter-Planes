@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
+    public GameManager gameManager;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -20,7 +22,8 @@ public class Coin : MonoBehaviour
     {
         if (whatIHit.tag == "Player")
         {
-            GameObject.Find("Game Manager").GetComponent<GameManager>().EarnScore(1);
+            gameManager.EarnScore(1);
+            gameManager.PlayCoinSound();
             Destroy(this.gameObject);
         }
         
